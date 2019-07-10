@@ -1,0 +1,3 @@
+class IncidentFreeCounter < ApplicationRecord
+
+end
