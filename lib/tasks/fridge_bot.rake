@@ -1,6 +1,7 @@
 namespace :fridge_bot do
   desc "Post message to slack channel"
   task post_message: :environment do
+    require_relative 'bot/bot'
     counter = IncidentFreeCounter.last
     days_since_incident = counter.days_since_incident
     Bot.instance.client.chat_postMessage(

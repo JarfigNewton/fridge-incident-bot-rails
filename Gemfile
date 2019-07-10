@@ -74,3 +74,5 @@ gem 'sinatra'
 gem 'dotenv'
 gem 'celluloid-io'
 gem 'whenever', require: false
+
+gem 'dotenv-rails', groups: [:development, :test]
