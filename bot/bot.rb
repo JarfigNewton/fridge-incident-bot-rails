@@ -1,7 +1,7 @@
 class Bot < SlackRubyBot::Bot
 
   command 'restart' do |client, data, match|
-    # Fix this
-    client.say(channel: data.channel, text: eval(match["expression"]))
+    IncidentFreeCounter.last.update(days_since_incident: 0)
+    client.say(channel: data.channel, text: "The counter has been reset to 0")
   end
 end
