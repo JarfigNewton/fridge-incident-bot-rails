@@ -1,6 +1,7 @@
 namespace :fridge_bot do
   desc "Post message to slack channel"
   task post_message: :environment do
+    puts "Posting message..."
     require 'slack-ruby-client'
 
     Slack.configure do |config|
