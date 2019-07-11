@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
-  def verify
+  skip_before_action :verify_authenticity_token, only: [:handle]
+
+  def handle
     # Extract the event payload from the request and parse the JSON
     request_data = JSON.parse(request.body.read)
 
