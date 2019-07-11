@@ -23,5 +23,6 @@ namespace :fridge_bot do
     )
 
     counter.update(days_since_incident: days_since_incident + 1)
+    puts "Done!"
   end
 end
