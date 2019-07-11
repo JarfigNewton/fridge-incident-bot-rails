@@ -30,5 +30,8 @@ class EventsController < ApplicationController
       # Return HTTP status code 200 so Slack knows we've received the event
       status 200
     end
+    respond_to do |format|
+      format.json { render :json => { "challenge": request_data['challenge'] } }
+    end
   end
 end
