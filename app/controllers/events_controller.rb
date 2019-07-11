@@ -18,7 +18,7 @@ class EventsController < ApplicationController
         # When we receive a `url_verification` event, we need to
         # return the same `challenge` value sent to us from Slack
         # to confirm our server's authenticity.
-        request_data['challenge']
+        json_message = { "challenge": request_data['challenge'] }
       # when 'message'
       #   # Event handler for when a user posts a message
       #   Events.user_join(team_id, event_data)
@@ -27,11 +27,9 @@ class EventsController < ApplicationController
       #   puts "Unexpected event:\n"
       #   puts JSON.pretty_generate(request_data)
       end
-      # Return HTTP status code 200 so Slack knows we've received the event
-      status 200
     end
     respond_to do |format|
-      format.json { render :json => { "challenge": request_data['challenge'] } }
+      format.json { render :json => json_message }
     end
   end
 end
