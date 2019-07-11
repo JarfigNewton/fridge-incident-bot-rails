@@ -29,6 +29,7 @@ class EventsController < ApplicationController
         end
         # Return HTTP status code 200 so Slack knows we've received the event
         status 200
+      end
     end
   end
 end
