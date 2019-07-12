@@ -10,7 +10,7 @@ class EventsController < ApplicationController
     case request_data['type']
     when 'event_callback'
       # Get the Team ID and event data from the request object
-      team_id = request_data['team_id']
+      # team_id = request_data['team_id']
       event_data = request_data['event']
 
       # Events have a "type" attribute included in their payload, allowing you to handle
@@ -22,8 +22,9 @@ class EventsController < ApplicationController
         # to confirm our server's authenticity.
         json_message = { "challenge": request_data['challenge'] }
       when 'message'
+        channel = request["event"]["channel"]
         # Event handler for when a user posts a message
-        Event.message_posted(team_id, event_data)
+        Event.message_posted(channel, event_data)
       else
         # In the event we receive an event we didn't expect, we'll log it and move on.
         puts "Unexpected event:\n"
