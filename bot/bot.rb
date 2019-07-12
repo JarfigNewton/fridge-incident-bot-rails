@@ -13,8 +13,10 @@ class Bot < SlackRubyBot::Bot
     client.auth_test
 
     current_counter = IncidentFreeCounter.last.days_since_incident
-    client.chat_postMessage(channel: channel,
-                            text: "The counter has been reset from #{current_counter} to 0")
+    sad_emojis = %w[:sad_potato: :sad_parrot: :crying_jordan_parrot: :crying_jordan: :kevin-chili:]
+    message = "~#{current_counter}~ 0 days without a fridge incident #{sad_emojis.sample}"
+
+    client.chat_postMessage(channel: channel, text: message)
     IncidentFreeCounter.last.update(days_since_incident: 0)
   end
 
