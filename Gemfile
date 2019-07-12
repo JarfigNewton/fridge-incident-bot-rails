@@ -75,3 +75,5 @@ gem 'dotenv'
 gem 'celluloid-io'
 
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'GiphyClient'
