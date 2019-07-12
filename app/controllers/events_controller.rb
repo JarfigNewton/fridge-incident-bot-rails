@@ -4,6 +4,8 @@ class EventsController < ApplicationController
   def handle
     # Extract the event payload from the request and parse the JSON
     request_data = JSON.parse(request.body.read)
+    p request_data
+    json_message = ""
 
     case request_data['type']
     when 'event_callback'
@@ -19,13 +21,13 @@ class EventsController < ApplicationController
         # return the same `challenge` value sent to us from Slack
         # to confirm our server's authenticity.
         json_message = { "challenge": request_data['challenge'] }
-      # when 'message'
-      #   # Event handler for when a user posts a message
-      #   Events.user_join(team_id, event_data)
-      # else
-      #   # In the event we receive an event we didn't expect, we'll log it and move on.
-      #   puts "Unexpected event:\n"
-      #   puts JSON.pretty_generate(request_data)
+      when 'message'
+        # Event handler for when a user posts a message
+        Event.message_posted(team_id, event_data)
+      else
+        # In the event we receive an event we didn't expect, we'll log it and move on.
+        puts "Unexpected event:\n"
+        puts JSON.pretty_generate(request_data)
       end
     end
     respond_to do |format|
