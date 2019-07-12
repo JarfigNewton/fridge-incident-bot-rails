@@ -16,11 +16,6 @@ class EventsController < ApplicationController
       # Events have a "type" attribute included in their payload, allowing you to handle
       # different event payloads as needed.
       case event_data['type']
-      when 'url_verification'
-        # When we receive a `url_verification` event, we need to
-        # return the same `challenge` value sent to us from Slack
-        # to confirm our server's authenticity.
-        json_message = { "challenge": request_data['challenge'] }
       when 'message'
         channel = request["event"]["channel"]
         # Event handler for when a user posts a message
@@ -30,6 +25,11 @@ class EventsController < ApplicationController
         puts "Unexpected event:\n"
         puts JSON.pretty_generate(request_data)
       end
+    when 'url_verification'
+      # When we receive a `url_verification` event, we need to
+      # return the same `challenge` value sent to us from Slack
+      # to confirm our server's authenticity.
+      json_message = { "challenge": request_data['challenge'] }
     end
     respond_to do |format|
       format.json { render :json => json_message }
