@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   def handle
     # Extract the event payload from the request and parse the JSON
     request_data = JSON.parse(request.body.read)
-    p request_data
+    Rails.logger request_data
     json_message = ""
 
     case request_data['type']
@@ -18,6 +18,8 @@ class EventsController < ApplicationController
       case event_data['type']
       when 'message'
         channel = request["event"]["channel"]
+        # Channel is #ca-office
+        # return unless channel == "C6SA83PG9"
         # Event handler for when a user posts a message
         Event.message_posted(channel, event_data)
       else

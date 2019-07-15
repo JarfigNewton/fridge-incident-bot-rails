@@ -3,11 +3,8 @@ class Event
     message = event_data['text']
     return unless message
     # Don't do anything if message doesn't include fridge and ajar and again
-    return if message.exclude?("fridge") || message.exclude?("ajar") ||
-              message.exclude?("again")
+    return if message.exclude?("fridge") || message.exclude?("ajar")
 
-    client = Slack::Web::Client.new
-    client.auth_test
     Bot.restart_counter(channel)
   end
 end
