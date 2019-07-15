@@ -10,7 +10,8 @@ namespace :fridge_bot do
   task post_message: :environment do
     puts "Posting message..."
     # Only post on Wednesday
-    next if is_weekend? || is_holiday? || is_wednesday?
+    next if is_weekend? || is_holiday?
+    next unless is_wednesday?
     counter = IncidentFreeCounter.last
     days_since_incident = counter.days_since_incident
     message = "#{days_since_incident} days without a fridge incident"
