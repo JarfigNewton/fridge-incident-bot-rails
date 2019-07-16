@@ -4,7 +4,9 @@ class EventsController < ApplicationController
   def handle
     # Extract the event payload from the request and parse the JSON
     request_data = JSON.parse(request.body.read)
-    Rails.logger request_data
+    puts '####################################'
+    puts request_data
+    puts '####################################'
     json_message = ""
 
     case request_data['type']
