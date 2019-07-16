@@ -19,7 +19,7 @@ class EventsController < ApplicationController
       when 'message'
         channel = request["event"]["channel"]
         # Channel is #ca-office
-        # return unless channel == "C6SA83PG9"
+        return unless channel == "C6SA83PG9"
         # Event handler for when a user posts a message
         Event.message_posted(channel, event_data)
       else
