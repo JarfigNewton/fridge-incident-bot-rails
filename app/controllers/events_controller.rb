@@ -20,7 +20,7 @@ class EventsController < ApplicationController
       case event_data['type']
       when 'message'
         channel = request["event"]["channel"]
-        # Channel is #ca-office
+        # Channel is #ca-office or #fridge-bot-test
         return unless channel == "C6SA83PG9" || channel == "CLG44T1GU"
         # Event handler for when a user posts a message
         Event.message_posted(channel, event_data)

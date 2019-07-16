@@ -22,8 +22,11 @@ namespace :fridge_bot do
     image_url = giphy_client.gifs_random_get(api_key, tag: tag).data.fixed_height_downsampled_url
 
     message = "#{days_since_incident} days without a fridge incident #{emoji.sample} \n #{image_url}"
-    # channel = "#california-office"
-    channel = "#fridge-bot-test"
+
+    # Testing channel
+    # channel = "#fridge-bot-test"
+
+    channel = "#california-office"
     Bot.post_message(channel, message)
     puts "Done!"
   end
