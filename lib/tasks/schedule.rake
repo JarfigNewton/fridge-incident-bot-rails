@@ -14,7 +14,8 @@ namespace :fridge_bot do
     # next unless is_wednesday?
     counter = IncidentFreeCounter.last
     days_since_incident = counter.days_since_incident
-    message = "#{days_since_incident} days without a fridge incident"
+    emoji = %w[:party_parrot: :party_ahnold: :party-starley: :ultra_fast_parrot: :shooting-starley: :spinning-potato: :party_potato: :potato-parrot:]
+    message = "#{days_since_incident} days without a fridge incident #{emoji.sample}"
     # channel = "#california-office"
     channel = "#fridge-bot-test"
     Bot.post_message(channel, message)
