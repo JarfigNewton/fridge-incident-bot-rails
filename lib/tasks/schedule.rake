@@ -15,7 +15,8 @@ namespace :fridge_bot do
     counter = IncidentFreeCounter.last
     days_since_incident = counter.days_since_incident
     message = "#{days_since_incident} days without a fridge incident"
-    channel = "#california-office"
+    # channel = "#california-office"
+    channel = "#fridge-bot-test"
     Bot.post_message(channel, message)
     puts "Done!"
   end
