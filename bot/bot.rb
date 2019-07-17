@@ -9,9 +9,6 @@ class Bot < SlackRubyBot::Bot
   end
 
   def self.restart_counter(channel)
-    client = Slack::Web::Client.new
-    client.auth_test
-
     current_counter = IncidentFreeCounter.last.days_since_incident
     sad_emojis = %w[:sad_potato: :sad_parrot: :crying_jordan_parrot: :crying_jordan: :kevin-chili:]
 
@@ -22,16 +19,14 @@ class Bot < SlackRubyBot::Bot
 
     message = "~#{current_counter}~ 0 days without a fridge incident #{sad_emojis.sample} \n #{image_url}"
 
-    client.chat_postMessage(channel: channel, text: message)
+    post_message(channel, message)
+
     IncidentFreeCounter.last.update(days_since_incident: 0)
   end
 
   def self.post_message(channel, message)
     client = Slack::Web::Client.new
     client.auth_test
-
-    counter = IncidentFreeCounter.last
-    days_since_incident = counter.days_since_incident
 
     client.chat_postMessage(
       channel: channel,
