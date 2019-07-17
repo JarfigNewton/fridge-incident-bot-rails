@@ -10,10 +10,11 @@ namespace :fridge_bot do
   task post_message: :environment do
     puts "Posting message..."
     # Only post on Wednesday
-    # next if is_weekend? || is_holiday?
-    # next unless is_wednesday?
+    next if is_weekend? || is_holiday?
+    next unless is_wednesday?
     counter = IncidentFreeCounter.last
     days_since_incident = counter.days_since_incident
+    next if days_since_incident <= 0
     emoji = %w[:party_parrot: :party_ahnold: :party-starley: :ultra_fast_parrot: :shooting-starley: :spinning-potato: :party_potato: :potato-parrot:]
 
     giphy_client = GiphyClient::DefaultApi.new
