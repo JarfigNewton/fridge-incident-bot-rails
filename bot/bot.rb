@@ -10,6 +10,7 @@ class Bot < SlackRubyBot::Bot
 
   def self.restart_counter(channel)
     current_counter = IncidentFreeCounter.last.days_since_incident
+    return if current_counter <= 0
     sad_emojis = %w[:sad_potato: :sad_parrot: :crying_jordan_parrot: :crying_jordan: :kevin-chili:]
 
     giphy_client = GiphyClient::DefaultApi.new
