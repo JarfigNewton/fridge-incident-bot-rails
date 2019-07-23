@@ -41,7 +41,7 @@ class Bot < SlackRubyBot::Bot
   def self.get_giphy_image_link
     giphy_client = GiphyClient::DefaultApi.new
     api_key = Rails.application.credentials.giphy_api_token
-    tag = %w[cry mad weep].sample
+    tag = %w[cry weep tears].sample
     image_url = giphy_client.gifs_random_get(api_key, tag: tag).data
                             .fixed_height_downsampled_url
   end
