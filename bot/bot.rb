@@ -13,7 +13,7 @@ class Bot < SlackRubyBot::Bot
     return if current_counter <= 0
 
     message = if current_counter > 0
-                first_time
+                first_time(current_counter)
               else
                 not_first_time
               end
@@ -23,7 +23,7 @@ class Bot < SlackRubyBot::Bot
     IncidentFreeCounter.last.update(days_since_incident: 0)
   end
 
-  def self.first_time
+  def self.first_time(current_counter)
     sad_emojis = %w[:sad_potato: :sad_parrot: :crying_jordan_parrot: :crying_jordan: :kevin-chili:]
 
     image_url = get_giphy_image_link
