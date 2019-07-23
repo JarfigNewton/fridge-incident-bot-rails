@@ -51,6 +51,7 @@ group :development do
 
   gem 'rake'
   gem 'foreman'
+  gem 'rspec-rails'
 end
 
 group :test do
@@ -64,6 +65,7 @@ group :test do
   gem 'rack-test'
   gem 'vcr'
   gem 'webmock'
+  gem 'rspec-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -79,3 +81,5 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'GiphyClient'
 
 gem 'holidays'
+
+gem 'httparty'
