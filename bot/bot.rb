@@ -10,7 +10,6 @@ class Bot < SlackRubyBot::Bot
 
   def self.restart_counter(channel)
     current_counter = IncidentFreeCounter.last.days_since_incident
-    return if current_counter <= 0
 
     message = if current_counter > 0
                 first_time(current_counter)
