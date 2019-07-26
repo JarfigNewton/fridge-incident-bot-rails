@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_184216) do
+ActiveRecord::Schema.define(version: 2019_07_26_143848) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "incident_free_counters", force: :cascade do |t|
     t.bigint "days_since_incident"
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.bigint "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object"
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
 end

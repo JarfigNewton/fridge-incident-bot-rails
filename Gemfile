@@ -83,3 +83,5 @@ gem 'GiphyClient'
 gem 'holidays'
 
 gem 'httparty'
+
+gem 'paper_trail'
