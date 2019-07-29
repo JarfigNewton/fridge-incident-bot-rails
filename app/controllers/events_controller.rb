@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     puts '####################################'
     puts request_data
     puts '####################################'
-    json_message = ""
+    json_message = { ok: true }
 
     case request_data['type']
     when 'event_callback'
@@ -36,7 +36,7 @@ class EventsController < ApplicationController
       json_message = { "challenge": request_data['challenge'] }
     end
     respond_to do |format|
-      format.json { render :json => json_message }
+      format.json { render :json => json_message, status: :ok }
     end
   end
 end
