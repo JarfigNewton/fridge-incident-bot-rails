@@ -22,7 +22,7 @@ namespace :fridge_bot do
     tag = %w[happy yay hurray].sample
     image_url = giphy_client.gifs_random_get(api_key, tag: tag).data.fixed_height_downsampled_url
 
-    message = "#{days_since_incident} days without a fridge incident #{emoji.sample} \n #{image_url}"
+    message = "#{days_since_incident} #{"day".pluralize(days_since_incident.to_i)} without a fridge incident #{emoji.sample} \n #{image_url}"
 
     # Testing channel
     # channel = "#fridge-bot-test"
