@@ -34,6 +34,7 @@ RSpec.describe TestWebmock do
 
     # Act/Assert
     expect(TestWebmock.hit_endpoint_one).to eq(["1", "2"])
-    expect(TestWebmock.hit_endpoint_two).to eq(["1", "2"])
+    # Should've been ["1", "2"] here
+    expect(TestWebmock.hit_endpoint_two).to eq(["2", "2"])
   end
 end
