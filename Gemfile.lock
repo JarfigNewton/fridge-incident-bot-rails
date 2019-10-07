@@ -108,6 +108,8 @@ GEM
     ethon (0.12.0)
       ffi (>= 1.3.0)
     execjs (2.7.0)
+    factory_bot (5.1.1)
+      activesupport (>= 4.2.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.13.1)
@@ -153,6 +155,8 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
+    nyan-cat-formatter (0.12.0)
+      rspec (>= 2.99, >= 2.14.2, < 4)
     paper_trail (10.3.0)
       activerecord (>= 4.2, < 6.1)
       request_store (~> 1.1)
@@ -301,18 +305,19 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   dotenv
   dotenv-rails
+  factory_bot
   foreman
   holidays
   httparty
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  nyan-cat-formatter
   paper_trail
   pg
   puma (~> 3.11)
   rack-test
   rails (~> 5.2.3)
   rake
-  rspec
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
