@@ -42,6 +42,35 @@ namespace :fridge_bot do
     puts "Done!"
   end
 
+  desc "Post monthly stats"
+  task monthly_task: :environment do
+    puts "Posting monthly task..."
+    next if last_business_day? DateTime.now.new_offset('-08:00').to_date
+    stats = Statistic.last || Statistic.create
+    counter = IncidentFreeCounter.last
+
+    if stats.monthly_high > counter.days_since_incident
+      monthly_high =  stats.monthly_high
+      monthly_high_date = stats.monthly_date.strftime("%m/%d/%Y")
+    else
+      monthly_high = counter.days_since_incident
+      monthly_high_date = "TODAY! :party_ahnold:"
+    end
+
+    if stats.monthly_high > counter.days_since_incident
+      all_time_high = stats.all_time_high
+      all_time_high_date = stats.all_time_high_date.strftime("%m/%d/%Y")
+    else
+      all_time_high = counter.days_since_incident
+      all_time_high_date = "TODAY! :party_ahnold:"
+    end
+
+    message = "Monthly high: #{monthly_high} - #{monthly_high_date}\nAll time high: #{all_time_high} - #{all_time_high_date}"
+    channel = "#california-office"
+    Bot.post_message(channel, message)
+    puts "Done!"
+  end
+
   def is_weekend?
     today = DateTime.now.new_offset('-08:00').to_date
     today.saturday? || today.sunday?
@@ -56,5 +85,14 @@ namespace :fridge_bot do
   def is_wednesday?
     today = DateTime.now.new_offset('-08:00').to_date
     today.saturday? || today.wednesday?
+  end
+
+  def last_business_day?(today)
+    day = DateTime.now.new_offset('-08:00').next_month.beginning_of_month
+    loop do
+      day = day.prev_day
+      break unless day.saturday?
+    end
+    day.to_date == today
   end
 end
