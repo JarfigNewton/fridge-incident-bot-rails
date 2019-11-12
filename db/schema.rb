@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_143848) do
+ActiveRecord::Schema.define(version: 2019_11_12_222000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "incident_free_counters", force: :cascade do |t|
     t.bigint "days_since_incident"
+  end
+
+  create_table "statistics", force: :cascade do |t|
+    t.bigint "monthly_high"
+    t.bigint "all_time_high"
+    t.date "monthly_high_date"
+    t.date "all_time_high_date"
   end
 
   create_table "versions", force: :cascade do |t|

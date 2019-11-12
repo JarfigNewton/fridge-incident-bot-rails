@@ -7,3 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 IncidentFreeCounter.create(days_since_incident: 0)
+
+Statistic.create
