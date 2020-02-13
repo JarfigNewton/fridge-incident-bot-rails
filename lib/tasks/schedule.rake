@@ -43,7 +43,7 @@ namespace :fridge_bot do
   end
 
   desc "Post monthly stats"
-  task monthly_task: :environment do
+  task monthly_stats: :environment do
     puts "Posting monthly task..."
     next if last_business_day? DateTime.now.new_offset('-08:00').to_date
     stats = Statistic.last || Statistic.create
