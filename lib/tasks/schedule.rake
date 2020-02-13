@@ -65,7 +65,13 @@ namespace :fridge_bot do
       all_time_high_date = "TODAY! :party_ahnold:"
     end
 
-    message = "Monthly high: #{monthly_high} - #{monthly_high_date}\nAll time high: #{all_time_high} - #{all_time_high_date}"
+    occurences = counter.versions.where(created_at: DateTime.now.new_offset('-08:00').beginning_of_month..DateTime.now.new_offset('-08:00').end_of_month)
+    # Continue here
+    occurences.map { |o| }
+
+
+
+    message = "*## Fridge Incident Analysis:*\nOccurences: #{occurences} #{"time".pluralize(occurences)}\nMonthly high: #{monthly_high} - #{monthly_high_date}\nAll time high: #{all_time_high} - #{all_time_high_date}"
     channel = "#california-office"
     Bot.post_message(channel, message)
     puts "Done!"
