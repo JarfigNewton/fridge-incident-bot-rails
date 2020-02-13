@@ -7,40 +7,38 @@ RSpec.describe Bot do
     stub_slack_message_api
   }
 
-  let(:counter) { create(:incident_free_counter) }
+  let!(:counter) { create(:incident_free_counter) }
 
-  it "restarts the counter" do
+  it "restarts the counter and posts first time message" do
     # Arrange
+    days_since_incident_before = counter.days_since_incident
     allow(Bot).to receive(:get_giphy_image_link).and_return("BOB")
+
+    # Assume
+    expect(Bot).to receive(:first_time)
+    expect(Bot).to receive(:post_message)
 
     # Act
     Bot.restart_counter("ASD")
 
     # Assert
-    expect(counter.days_since_incident).to eq(5)
+    expect(counter.reload.days_since_incident).to eq(0)
   end
 
-  it "posts first time message" do
-    # Arrange
-    allow(Bot).to receive(:get_giphy_image_link).and_return("BOB")
-
-    # Expect
-    expect(Bot).to receive(:post_message).with("ASD", /0 days without a fridge incident/)
-
-    # Act
-    Bot.restart_counter("ASD")
-  end
-
-  it "posts second time message" do
+  it "restarts the counter and posts not first time message" do
     # Arrange
     counter.update(days_since_incident: 0)
+    allow(Bot).to receive(:get_giphy_image_link).and_return("BOB")
 
-    # Expect
-    expect(Bot).to receive(:post_message).with("ASD", /more than 1 fridge incident today/)
+    # Assume
+    expect(Bot).to receive(:not_first_time)
+    expect(Bot).to receive(:post_message)
 
     # Act
     Bot.restart_counter("ASD")
+
+    # Assert
+    expect(counter.reload.days_since_incident).to eq(0)
+
   end
-
-
 end
